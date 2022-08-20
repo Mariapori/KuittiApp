@@ -1,0 +1,40 @@
+﻿@{
+    ViewData["Title"] = "Etusivu";
+    List<Kuitti> Kuitit = ViewBag.kuitit ?? new List<Kuitti>();
+}
+@if (User.Identity.IsAuthenticated)
+{
+    @Html.ActionLink("Uusi", "Uusi", "Home",null, new { @class = "btn btn-primary", style = "margin-bottom: 5px;"})
+}
+
+@if (Kuitit.Count > 0)
+{
+    <table class="table table-striped">
+        <thead class="table table-dark">
+            <tr>
+                <th>Kuva</th>
+                <th>PVM</th>
+                <th>Kuvaus</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Kuitit)
+            {
+                <tr>
+                    <td><a target="_blank" href="@Url.Action("AvaaKuitti", new {Id = item.Id})"><img style="width: 100%; max-width: 80px;" src="data:image/png;base64,@Convert.ToBase64String(item.Kuva)" /></a></td>
+                    <td>@item.PVM.ToString()</td>
+                    <td>@item.Kuvaus</td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+}
+else if (User.Identity.IsAuthenticated && Kuitit.Count == 0)
+{
+    <h2>Sinulla ei ole kuitteja.</h2>
+}
+else
+{
+    <h2>Kirjaudu sisään nähdäksesi kuittisi.</h2>
+}

@@ -1,0 +1,21 @@
+﻿@{
+    ViewData["Title"] = "Uusi";
+}
+
+@using (Html.BeginForm(FormMethod.Post, new { enctype = "multipart/form-data"}))
+{
+        @Html.AntiForgeryToken()
+        <div class="container">
+            <div class="md-2">
+                <span>Kuvaus: </span>
+                @Html.TextBox("Kuvaus",null, new { @class = "form-control" })
+            </div>
+            <div class="md-2">
+                <span>Kuva: </span>
+                @Html.TextBox("Kuva", null, new { type = "file", accept = "image/*", @class = "form-control" })
+            </div>
+            <div class="md-2">
+                <button type="submit" class="btn btn-primary" style="margin-top: 5px;">Tallenna</button>
+            </div>
+        </div>
+}
