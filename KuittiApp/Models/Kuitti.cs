@@ -7,11 +7,12 @@ namespace KuittiApp.Models
     {
         [Key]
         public string Id { get; set; }
-        public DateTime PVM { get; set; }
+        public DateTime OstoPVM { get; set; }
         public string Kuvaus { get; set; }
         public byte[] Kuva { get; set; }
         public string ContentType { get; set; }
         public string Kayttaja { get; set; }
+        public int TakuuKK { get; set; }
     }
 }
 

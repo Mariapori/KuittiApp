@@ -13,17 +13,29 @@
         <thead class="table table-dark">
             <tr>
                 <th>Kuva</th>
-                <th>PVM</th>
+                <th>Takuu</th>
+                <th>Ostopäivä</th>
                 <th>Kuvaus</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
             @foreach (var item in Kuitit)
-            {
+                {
+                    string takuuVoimassa = "Ei";
+                    DateTime takuuLoppu = item.OstoPVM.AddMonths(item.TakuuKK);
+                    if(takuuLoppu.Date >= DateTime.Now.Date)
+                    {
+                        TimeSpan vali = takuuLoppu.Date - DateTime.Now.Date;
+                        takuuVoimassa = $"Kyllä ({vali.TotalDays} pv)";
+                    }
+
                 <tr>
                     <td><a target="_blank" href="@Url.Action("AvaaKuitti", new {Id = item.Id})"><img style="width: 100%; max-width: 80px;" src="data:image/png;base64,@Convert.ToBase64String(item.Kuva)" /></a></td>
-                    <td>@item.PVM.ToString()</td>
+                    <td>@takuuVoimassa</td>
+                    <td>@item.OstoPVM.ToString("dd.MM.yyyy")</td>
                     <td>@item.Kuvaus</td>
+                    <td><a href="@Url.Action("PoistaKuitti", "Home", new { Id = item.Id })" style="color:red; font-weight:900;">X</a></td>
                 </tr>
             }
 

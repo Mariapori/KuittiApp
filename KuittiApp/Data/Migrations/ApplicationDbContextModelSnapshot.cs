@@ -38,8 +38,11 @@ namespace KuittiApp.Data.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime>("PVM")
+                    b.Property<DateTime>("OstoPVM")
                         .HasColumnType("TEXT");
+
+                    b.Property<int>("TakuuKK")
+                        .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
 

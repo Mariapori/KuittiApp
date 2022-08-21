@@ -34,14 +34,16 @@ public class HomeController : Controller
         return View();
     }
     [HttpPost]
-    public IActionResult Uusi(string Kuvaus, IFormFile Kuva)
+    [ValidateAntiForgeryToken]
+    public IActionResult Uusi(string Kuvaus, DateTime OstoPVM,int TakuuKK, IFormFile Kuva)
     {
         try
         {
             var kuitti = new Kuitti();
             kuitti.Id = Guid.NewGuid().ToString();
-            kuitti.PVM = DateTime.Now;
+            kuitti.OstoPVM = OstoPVM;
             kuitti.Kayttaja = User.Identity.Name;
+            kuitti.TakuuKK = TakuuKK;
             kuitti.Kuvaus = Kuvaus;
 
             if(Kuva.Length > 0)
@@ -67,6 +69,22 @@ public class HomeController : Controller
     {
         var kuva = _db.Kuitit.FirstOrDefault(o => o.Id == Id);
         return File(kuva?.Kuva,kuva?.ContentType);
+    }
+
+    [Authorize]
+    public IActionResult PoistaKuitti(string Id)
+    {
+        var kuitti = _db.Kuitit.FirstOrDefault(o => o.Id == Id);
+        if (kuitti.Kayttaja == User.Identity.Name)
+        {
+            _db.Kuitit.Remove(kuitti);
+            _db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+        else
+        {
+            throw new UnauthorizedAccessException("Sinulla ei ole oikeutta poistaa tätä.");
+        }
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
