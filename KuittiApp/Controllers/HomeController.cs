@@ -11,13 +11,11 @@ public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
     private readonly ApplicationDbContext _db;
-    private readonly ConfigurationManager _config;
 
-    public HomeController(ILogger<HomeController> logger, ApplicationDbContext db, ConfigurationManager config)
+    public HomeController(ILogger<HomeController> logger, ApplicationDbContext db)
     {
         _logger = logger;
         _db = db;
-        _config = config;
     }
 
     public IActionResult Index()
