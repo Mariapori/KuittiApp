@@ -14,6 +14,11 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
 
+if (!System.OperatingSystem.IsMacOS())
+{
+    builder.WebHost.UseUrls("http://*:6650");
+}
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
