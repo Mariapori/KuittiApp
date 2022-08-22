@@ -12,6 +12,7 @@
     <None Remove="Microsoft.Extensions.ApiDescription.Client" />
     <None Remove="Newtonsoft.Json" />
     <None Remove="BotCrypt" />
+    <None Remove="PagedList.Mvc" />
   </ItemGroup>
   <ItemGroup>
     <None Update="app.db" CopyToOutputDirectory="PreserveNewest" ExcludeFromSingleFile="true" />
@@ -42,6 +43,7 @@
     </PackageReference>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="BotCrypt" Version="1.5.0" />
+    <PackageReference Include="PagedList.Mvc" Version="4.5.0" />
   </ItemGroup>
 
 </Project>

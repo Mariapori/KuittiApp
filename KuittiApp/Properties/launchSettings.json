@@ -11,7 +11,7 @@
     "KuittiApp": {
       "commandName": "Project",
       "launchBrowser": true,
-      "applicationUrl": "http://localhost:37857",
+      "applicationUrl": "http://localhost:6983",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

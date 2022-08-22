@@ -4,6 +4,7 @@ using KuittiApp.Models;
 using KuittiApp.Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.StaticFiles;
+using PagedList;
 
 namespace KuittiApp.Controllers;
 
@@ -18,11 +19,11 @@ public class HomeController : Controller
         _db = db;
     }
 
-    public IActionResult Index()
+    public IActionResult Index(int? pageNumber = 1)
     {
         if (User.Identity.IsAuthenticated)
         {
-            var kuitit = _db.Kuitit.Where(o => o.Kayttaja == User.Identity.Name).ToList();
+            var kuitit = _db.Kuitit.Where(o => o.Kayttaja == User.Identity.Name).OrderByDescending(o => o.OstoPVM).ToPagedList(pageNumber ?? 1,10);
             ViewBag.kuitit = kuitit;
         }
 
