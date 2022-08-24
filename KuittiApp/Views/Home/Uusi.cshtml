@@ -2,35 +2,32 @@
     ViewData["Title"] = "Uusi";
 }
 
-<!-- Wrap the image or canvas element with a block element (container) -->
-<div>
-    <img id="image" style="display:block;max-width:100%;"/>
-</div>
 
 @using (Html.BeginForm(FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
-    <div class="container">
-        <div class="md-2">
-            <span>Kuvaus: </span>
-            @Html.TextBox("Kuvaus", null, new { @class = "form-control", required = "required" })
-        </div>
-        <div class="md-2">
-            <span>OstoPVM: </span>
-            @Html.TextBox("OstoPVM", DateTime.Now, new { @class = "form-control", type = "date", required = "required" })
-        </div>
-        <div class="md-2">
-            <span>Takuu (kk): </span>
-            @Html.TextBox("TakuuKK", 12, new { @class = "form-control", type = "number", required = "required" })
-        </div>
-        <div class="md-2">
-            <span>Kuva: </span>
-            @Html.TextBox("Kuva", null, new { type = "file", accept = "image/*", @class = "form-control", required = "required", onchange = "readURL(this);" })
-        </div>
-        <div class="md-2">
-            <button type="submit" class="btn btn-primary" style="margin-top: 5px;">Tallenna</button>
-        </div>
+<div class="container">
+    <div class="md-2">
+        <span>Kuvaus: </span>
+        @Html.TextBox("Kuvaus", null, new { @class = "form-control", required = "required" })
     </div>
+    <div class="md-2">
+        <span>OstoPVM: </span>
+        @Html.TextBox("OstoPVM", DateTime.Now, new { @class = "form-control", type = "date", required = "required" })
+    </div>
+    <div class="md-2">
+        <span>Takuu (kk): </span>
+        @Html.TextBox("TakuuKK", 12, new { @class = "form-control", type = "number", required = "required" })
+    </div>
+    <div class="md-2">
+        <span>Kuva: </span>
+        @Html.TextBox("Kuva", null, new { type = "file", accept = "image/*", @class = "form-control", required = "required", onchange = "readURL(this);" })
+        <img id="image" style="display:block;max-width:50%; margin-top: 5px;" />
+    </div>
+    <div class="md-2">
+        <button type="submit" class="btn btn-primary" style="margin-top: 5px;">Tallenna</button>
+    </div>
+</div>
 }
 
 <script>
@@ -39,25 +36,46 @@
             var reader = new FileReader();
             reader.onload = function (e) {
                 $('#image')
-                    .attr('src', e.target.result)
-                    .width(150)
-                    .height(200);
+                    .attr('src', e.target.result);
+                @*var image = document.querySelector('#image');
+                var minAspectRatio = 0.5;
+                var maxAspectRatio = 1.5;
+                var cropper = new Cropper(image, {
+                    ready: function () {
+                        var cropper = this.cropper;
+                        var containerData = cropper.getContainerData();
+                        var cropBoxData = cropper.getCropBoxData();
+                        var aspectRatio = cropBoxData.width / cropBoxData.height;
+                        var newCropBoxWidth;
+
+                        if (aspectRatio < minAspectRatio || aspectRatio > maxAspectRatio) {
+                            newCropBoxWidth = cropBoxData.height * ((minAspectRatio + maxAspectRatio) / 2);
+
+                            cropper.setCropBoxData({
+                                left: (containerData.width - newCropBoxWidth) / 2,
+                                width: newCropBoxWidth
+                            });
+                        }
+                    },
+
+                    cropmove: function () {
+                        var cropper = this.cropper;
+                        var cropBoxData = cropper.getCropBoxData();
+                        var aspectRatio = cropBoxData.width / cropBoxData.height;
+
+                        if (aspectRatio < minAspectRatio) {
+                            cropper.setCropBoxData({
+                                width: cropBoxData.height * minAspectRatio
+                            });
+                        } else if (aspectRatio > maxAspectRatio) {
+                            cropper.setCropBoxData({
+                                width: cropBoxData.height * maxAspectRatio
+                            });
+                        }
+                    },
+                });*@
             };
             reader.readAsDataURL(input.files[0]);
-
-            const image = document.getElementById('image');
-            const cropper = new Cropper(image, {
-                aspectRatio: 16 / 9,
-                crop(event) {
-                    console.log(event.detail.x);
-                    console.log(event.detail.y);
-                    console.log(event.detail.width);
-                    console.log(event.detail.height);
-                    console.log(event.detail.rotate);
-                    console.log(event.detail.scaleX);
-                    console.log(event.detail.scaleY);
-                },
-            });
         }
     }
 </script>
