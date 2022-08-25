@@ -13,7 +13,7 @@
     <table class="table table-striped">
         <thead class="table table-dark">
             <tr>
-                <th>Kuva</th>
+                <th>Katso</th>
                 <th>Takuu</th>
                 <th>Ostopäivä</th>
                 <th>Kuvaus</th>
@@ -32,11 +32,11 @@
                 }
 
                 <tr>
-                    <td><a target="_blank" href="@Url.Action("AvaaKuitti", new {Id = item.Id})"><img style="width: 100%; max-width: 80px;" src="data:image/png;base64,@Convert.ToBase64String(item.Kuva)" /></a></td>
+                    <td><a target="_blank" class="btn btn-primary" href="@Url.Action("AvaaKuitti", new {Id = item.Id})">Kuitti</a></td>
                     <td>@takuuVoimassa</td>
                     <td>@item.OstoPVM.ToString("dd.MM.yyyy")</td>
                     <td>@item.Kuvaus</td>
-                    <td><a href="@Url.Action("PoistaKuitti", "Home", new { Id = item.Id })" style="color:red; font-weight:900;">X</a></td>
+                    <td><a class="btn btn-outline-danger" href="@Url.Action("PoistaKuitti", "Home", new { Id = item.Id })" style="font-weight:900;">×</a></td>
                 </tr>
             }
 
