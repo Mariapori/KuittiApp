@@ -6,6 +6,7 @@
 @if (User.Identity.IsAuthenticated)
 {
     @Html.ActionLink("Uusi", "Uusi", "Home", null, new { @class = "btn btn-primary", style = "margin-bottom: 5px;" })
+    <hr />
 }
 
 @if (Kuitit.Count > 0)
