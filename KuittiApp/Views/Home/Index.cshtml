@@ -18,7 +18,7 @@
                 <th>Takuu</th>
                 <th>Ostopäivä</th>
                 <th>Kuvaus</th>
-                <th></th>
+                <th>Toiminnot</th>
             </tr>
         </thead>
         <tbody>
@@ -37,7 +37,7 @@
                     <td>@takuuVoimassa</td>
                     <td>@item.OstoPVM.ToString("dd.MM.yyyy")</td>
                     <td>@item.Kuvaus</td>
-                    <td><a class="btn btn-outline-danger" href="@Url.Action("PoistaKuitti", "Home", new { Id = item.Id })" style="font-weight:900;">×</a></td>
+                    <td><a class="btn btn-outline-danger" href="@Url.Action("PoistaKuitti", "Home", new { Id = item.Id })" style="font-weight:900;" onclick="return poisto();">×</a></td>
                 </tr>
             }
 
@@ -49,11 +49,11 @@
     <div style="padding: 5px;">
         @if (Kuitit.PageNumber > 1)
         {
-            @Html.ActionLink("<<<", "Index", "Home", new { pageNumber = Kuitit.PageNumber - 1 }, new { @class = "btn btn-primary", style = "margin-right: 5px;"})
+            @Html.ActionLink("Edellinen", "Index", "Home", new { pageNumber = Kuitit.PageNumber - 1 }, new { @class = "btn btn-primary", style = "margin-right: 5px;"})
         }
         @if (Kuitit.PageNumber > 0 && Kuitit.PageNumber < Kuitit.PageCount)
         {
-            @Html.ActionLink(">>>", "Index", "Home", new { pageNumber = Kuitit.PageNumber + 1 }, new { @class = "btn btn-primary" })
+            @Html.ActionLink("Seuraava", "Index", "Home", new { pageNumber = Kuitit.PageNumber + 1 }, new { @class = "btn btn-primary" })
         }
     </div>
 }
@@ -65,3 +65,8 @@ else
 {
     <h2>Kirjaudu sisään nähdäksesi kuittisi.</h2>
 }
+<script>
+    function poisto() {
+        return confirm('Haluatko varmasti poistaa?');
+    }
+</script>
