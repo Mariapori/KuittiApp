@@ -46,4 +46,10 @@
     <PackageReference Include="PagedList.Mvc" Version="4.5.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Remove="wwwroot\icons\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="wwwroot\icons\" />
+  </ItemGroup>
 </Project>

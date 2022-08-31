@@ -9,19 +9,19 @@
 <div class="container">
     <div class="md-2">
         <span>Kuvaus: </span>
-        @Html.TextBox("Kuvaus", null, new { @class = "form-control", required = "required" })
+        @Html.TextBox("Kuvaus", null, new { @class = "form-control-mw200", required = "required" })
     </div>
     <div class="md-2">
         <span>OstoPVM: </span>
-        @Html.TextBox("OstoPVM", DateTime.Now, new { @class = "form-control", type = "date", required = "required" })
+        @Html.TextBox("OstoPVM", DateTime.Now, new { @class = "form-control-mw200", type = "date", required = "required" })
     </div>
     <div class="md-2">
         <span>Takuu (kk): </span>
-        @Html.TextBox("TakuuKK", 12, new { @class = "form-control", type = "number", required = "required" })
+        @Html.TextBox("TakuuKK", 12, new { @class = "form-control-mw200", type = "number", required = "required" })
     </div>
     <div class="md-2">
         <span>Kuva: </span>
-        @Html.TextBox("Kuva", null, new { type = "file", accept = "image/*", @class = "form-control", required = "required", onchange = "readURL(this);" })
+        @Html.TextBox("Kuva", null, new { type = "file", accept = "image/*", @class = "form-control", required = "required", onchange = "readURL(this);", style = "max-width: 500px;" })
         <img id="image" style="display:block;max-width:50%; margin-top: 5px;" />
     </div>
     <div class="md-2">

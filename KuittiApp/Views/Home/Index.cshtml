@@ -11,14 +11,14 @@
 
 @if (Kuitit.Count > 0)
 {
-    <table class="table table-striped">
+    <table class="table table-responsive-sm table-striped">
         <thead class="table table-dark">
             <tr>
-                <th>Katso</th>
+                <th></th>
                 <th>Takuu</th>
                 <th>Ostopäivä</th>
                 <th>Kuvaus</th>
-                <th>Toiminnot</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -33,11 +33,11 @@
                 }
 
                 <tr>
-                    <td><a target="_blank" class="btn btn-primary" href="@Url.Action("AvaaKuitti", new {Id = item.Id})">Kuitti</a></td>
+                    <td><a style="padding-right: 1px !important; padding-left: 1px !important; padding-top: 1px !important; padding-bottom: 1px !important;" target="_blank" class="btn btn-primary" href="@Url.Action("AvaaKuitti", new {Id = item.Id})"><img style="filter: invert(100%); width:100%;" src="~/icons/bill.png" /></a></td>
                     <td>@takuuVoimassa</td>
                     <td>@item.OstoPVM.ToString("dd.MM.yyyy")</td>
                     <td>@item.Kuvaus</td>
-                    <td><a class="btn btn-outline-danger" href="@Url.Action("PoistaKuitti", "Home", new { Id = item.Id })" style="font-weight:900;" onclick="return poisto();">×</a></td>
+                    <td><a class="btn btn-outline-danger" href="@Url.Action("PoistaKuitti", "Home", new { Id = item.Id })" onclick="return poisto();">×</a></td>
                 </tr>
             }
 
